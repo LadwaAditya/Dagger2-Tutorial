@@ -14,7 +14,20 @@ import dagger.Provides;
  */
 @Module
 public class SharedPreferenceModule {
+    Application mApplication;
 
+    public SharedPreferenceModule(Application mApplication) {
+        this.mApplication = mApplication;
+    }
+
+    //Application is required for shared preference
+    @Provides
+    @Singleton
+    Application providesApplication() {
+        return mApplication;
+    }
+
+    //Application context is injected using the above menthd
     @Provides
     @Singleton
     SharedPreferences providesSharedPreferences(Application application) {
